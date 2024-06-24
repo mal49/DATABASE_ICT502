@@ -8,6 +8,32 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div class="wrapper" id="signUp" style="display: none;">
+        <h1 id="signUpheader">Sign Up</h1>
+        <form id="sisoform" action="#" method="post">
+            <input type="text" placeholder="Username" required>
+            <input type="text" placeholder="Name" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <input type="password" placeholder="Re-enter Password" required>
+        </form>
+        <input type="submit" id="sisobtn" value="Sign Up">
+        <div class="members">
+            Already a member? <a href="" id="loginlink">Login here!</a>
+        </div>
+    </div>
+
+    <div class="wrapper" id="signIn">
+        <h1 id="signInheader">Sign In</h1>
+        <form id="sisoform" action="#" method="post">
+            <input type="text" placeholder="Username">
+            <input type="password" placeholder="Password">
+        </form>
+        <input type="submit" id="sisobtn" value="Sign Up">
+        <div class="members">
+            dont't have an account <a href="" id="signUplink">Sign Up here!</a>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

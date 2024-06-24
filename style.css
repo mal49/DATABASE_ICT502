@@ -1,7 +1,8 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: monospace;
+    box-sizing: border-box;
+    font-family: "monospace", sans-serif;
 }
 
 #menu li a{
@@ -59,4 +60,69 @@
     top: 70%;
     left: 47%;
     transition: all 1s ease;
+}
+
+.wrapper{
+    width: 330px;
+    padding: 2rem 1rem;
+    margin: 50px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+
+}
+
+#signUpheader{
+    font-size: 2rem;
+    color: #07001f;
+    margin-bottom: 1.2rem;
+}
+
+#sisoform input{
+    width: 92%;
+    outline: none;
+    border: 1px solid #fff;
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    color: #fff;
+    background: #c5c6c7;
+}
+
+#sisobtn{
+    font-size: 1rem;
+    margin-top: 1.8rem;
+    padding: 10px 0;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    width: 90%;
+    color: #fff;
+    cursor: pointer;
+    background: #000;
+}
+
+#sisobtn:hover{
+    background: #0d0907;
+}
+
+#sisoform:focus{
+    border: 1px solid rgb(129, 192, 192); 
+}
+
+.members{
+    font-size: 1rem;
+    margin-top: 1.4rem;
+    color: #636363;
+}
+
+.members a{
+    text-decoration: none;
+    color: #000;
+}
+
+.members a:hover{
+    background-color: #000;
+    color: #fff;
 }
