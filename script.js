@@ -9,6 +9,6 @@ signUplink.addEventListener('click', function(){
 })
 
 loginlink.addEventListener('click', function(){
-    signInform.style.display = "none";
-    signUpform.style.display = "block";
+    signUpform.style.display = "none";
+    signInform.style.display = "block";
 })

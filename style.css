@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "monospace", sans-serif;
+    font-family: monospace, sans-serif;
 }
 
 #menu li a{
@@ -70,10 +70,9 @@
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-
 }
 
-#signUpheader{
+#sisoheader{
     font-size: 2rem;
     color: #07001f;
     margin-bottom: 1.2rem;
@@ -107,8 +106,8 @@
     background: #0d0907;
 }
 
-#sisoform:focus{
-    border: 1px solid rgb(129, 192, 192); 
+#sisoform input:focus{
+    border: 1px solid #000; 
 }
 
 .members{
@@ -117,12 +116,62 @@
     color: #636363;
 }
 
-.members a{
+.members button{
+    border: none;
+    background-color: transparent;
     text-decoration: none;
     color: #000;
 }
 
-.members a:hover{
+.members button:hover{
     background-color: #000;
     color: #fff;
+}
+
+.siso-staff{
+    width: 330px;
+    padding: 2rem 1rem;
+    margin: 50px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+
+.siso-staff h1{
+    font-size: 1.2rem;
+    color: #07001f;
+    margin-bottom: 1.2rem;
+}
+
+.siso-staff input{
+    width: 92%;
+    outline: none;
+    border: 1px solid #fff;
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    color: #fff;
+    background: #c5c6c7;
+}
+
+#siso-staffbtn{
+    font-size: 1rem;
+    margin-top: 1.8rem;
+    padding: 10px 0;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    width: 90%;
+    color: #fff;
+    cursor: pointer;
+    background: #000;
+}
+
+#siso-staffbtn:hover{
+    background: #0d0907;
+}
+
+.siso-staff input:focus{
+    border: 1px solid #000; 
 }
