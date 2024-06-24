@@ -10,26 +10,26 @@
 <body>
     <div class="wrapper" id="signUp" style="display: none;">
         <h1 id="sisoheader">SIGN UP</h1>
-        <form id="sisoform" action="#" method="post">
-            <input type="text" placeholder="Username" required>
-            <input type="text" placeholder="Name" required>
-            <input type="email" placeholder="Email" required>
-            <input type="password" placeholder="Password" required>
+        <form id="sisoform" method="post" action="client-register.php">
+            <input type="text" id="Username" placeholder="Username" name="Username" required>
+            <input type="text" id="Name" placeholder="Name" name="Name" required>
+            <input type="email" id="email" placeholder="Email" name="email" required>
+            <input type="password" id="password" placeholder="Password" name="password" required>
             <input type="password" placeholder="Re-enter Password" required>
+            <input type="submit" id="sisobtn" value="Sign Up" name="siso-signup">
         </form>
-        <input type="submit" id="sisobtn" value="Sign Up">
         <div class="members">
-            Already a member? <button id="loginlink">Login here!</button>
+            Already a member? <button id="loginlink">Login here!</button>   
         </div>
     </div>
 
     <div class="wrapper" id="signIn">
         <h1 id="sisoheader">SIGN IN</h1>
-        <form id="sisoform" action="#" method="post">
+        <form id="sisoform" method="post" action="client-register.php">
             <input type="text" placeholder="Username">
             <input type="password" placeholder="Password">
+            <input type="submit" id="sisobtn" value="Login" name="siso-login">
         </form>
-        <input type="submit" id="sisobtn" value="Login">
         <div class="members">
             don't have an account <button id="signUplink">Sign Up here!</button>
         </div>
