@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="siso-staff">
-        <h1>STAFF SIGN IN</h1>
-        <form action="#">
+    <div class="wrapper">
+        <h1 id="sisoheader">STAFF SIGN IN</h1>
+        <form id="sisoform" action="#">
             <input type="text" placeholder="StaffID">
             <input type="password" placeholder="Password">
+            <input type="submit" id="sisobtn" value="Login" name="staff-login">
         </form>
-        <input type="submit" id="siso-staffbtn" value="Login">
     </div>
 </body>
 </html>

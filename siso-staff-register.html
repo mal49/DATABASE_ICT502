@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper" id="signUp">
+        <h1 id="sisoheader">SIGN UP</h1>
+        <form id="sisoform" method="post" action="staff-register.php">
+            <input type="number" id="staffid" placeholder="staffID" name="staffid" max="5" required>
+            <input type="text" id="Name" placeholder="Name" name="Name" required>
+            <input type="email" id="email" placeholder="Email" name="email" required>
+            <input type="number" id="pnumber" placeholder="Phone Number" name="pnumber" max="11" required>
+            <input type="password" id="password" placeholder="Password" name="password" required>
+            <input type="password" placeholder="Re-enter Password" required>
+            <input type="submit" id="sisobtn" value="Sign Up" name="staff-signup">
+        </form>
+    </div>
+</body>
+</html>
