@@ -23,7 +23,7 @@
 
         if(oci_execute($stid))
         {
-            header("location: client-homepage.html");
+            header("location: about-us.html");
             exit;
         }
         else
