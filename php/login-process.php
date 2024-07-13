@@ -19,7 +19,7 @@
 
         if($row)
         {
-                header("location: staff-homepage.html");
+                header("location: ../html/staff-homepage.html");
         }
         else
         {
@@ -44,7 +44,7 @@
 
         if($row)
         {
-                header("location: client-homepage.html");
+                header("location: ../html/client-homepage.html");
         }
         else
         {

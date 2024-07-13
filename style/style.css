@@ -128,4 +128,16 @@
     color: #fff;
 }
 
+.status-container{
+    display: flex;
+    align-items: center;
+}
+
+.status-container label{
+    margin-right: 10px;
+}
+
+.status-container select{
+    width: 1px;
+}
    

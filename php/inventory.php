@@ -28,7 +28,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get your book now!</title>
+    <title>Inventory</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body style="margin: 50px;">
@@ -41,8 +41,9 @@
             <th>GENRE</th>
             <th>AUTHOR</th>
             <th>PUBLISHER</th>
+            <th>PRICE</th>
+            <th>STATUS</th>
             <th>ACTION</th>
-            <a href=""></a>
         </tr>
         <?php
             oci_execute($stid);
@@ -51,11 +52,17 @@
             {
                 echo '<tr>'; 
                 echo '<td>' . htmlentities($row['ISBN']) . '</td>';
+                echo "<form method='post' action = 'staff-edit.php'>";
                 echo '<td>' . htmlentities($row['BOOK_NAME']) . '</td>';
                 echo '<td>' . htmlentities($row['GENRE']) . '</td>';
                 echo '<td>' . htmlentities($row['AUTHOR']) . '</td>';
                 echo '<td>' . htmlentities($row['PUBLISHER']) . '</td>';
-                echo '<td> <a href="#" class="btn btn-success">Add to cart</a>';
+                echo '<td>$' . htmlentities($row['PRICE']) . '</td>';
+                echo '<td>' . htmlentities($row['STATUS']) . '</td>';
+                echo '<td> <a href="staff-edit.php?id='. htmlentities($row['ISBN']) .'" class="btn btn-success">Update</a> 
+                           <a href="#" class="btn btn-danger">Delete</a> 
+                      </td>';
+                echo "</form>";
                 echo '</tr>';
                 $row_count++;
             }

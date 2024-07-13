@@ -41,8 +41,9 @@
             <th>GENRE</th>
             <th>AUTHOR</th>
             <th>PUBLISHER</th>
+            <th>PRICE</th>
+            <th>STATUS</th>
             <th>ACTION</th>
-            <a href=""></a>
         </tr>
         <?php
             oci_execute($stid);
@@ -55,8 +56,7 @@
                 echo '<td>' . htmlentities($row['GENRE']) . '</td>';
                 echo '<td>' . htmlentities($row['AUTHOR']) . '</td>';
                 echo '<td>' . htmlentities($row['PUBLISHER']) . '</td>';
-                echo '<td> <a href="#" class="btn btn-success">Update</a>';
-                echo '<td> <a href="#" class="btn btn-danger">Delete</a>';
+                echo '<td> <a href="#" class="btn btn-success">Add to cart</a> </td>';
                 echo '</tr>';
                 $row_count++;
             }
