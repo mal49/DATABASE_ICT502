@@ -11,7 +11,7 @@
         $pnumber = $_POST['pnumber'];
         $password = $_POST['password'];
         $role = $_POST['select-role'];
-        $hash = password_hash($password, PASSWORD_DEFAULT);
+        //$hash = password_hash($password, PASSWORD_DEFAULT);
         
         $sql = "INSERT INTO staff (staffid, name, email, phone_num, password, role)
                 VALUES (:staffid, :name, :email, :phone_num, :password, :role)";
@@ -22,12 +22,12 @@
         oci_bind_by_name($stid, ":name", $name);
         oci_bind_by_name($stid, ":email", $email);
         oci_bind_by_name($stid, ":phone_num", $pnumber);
-        oci_bind_by_name($stid, ":password", $hash);
+        oci_bind_by_name($stid, ":password", $password);
         oci_bind_by_name($stid, ":role", $role);
 
         if(oci_execute($stid))
         {
-            header("location: about-us.html");
+            header("location: siso-staff.php");
             exit;
         }
         else

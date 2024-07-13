@@ -25,15 +25,15 @@
 
     <div class="wrapper" id="signIn">
         <h1 id="sisoheader">SIGN IN</h1>
-        <form id="sisoform" method="post" action="client-register.php">
-            <input type="text" placeholder="Username">
-            <input type="password" placeholder="Password">
+        <form id="sisoform" method="post" action="login-process.php">
+            <input type="text" placeholder="Username" name="uname">
+            <input type="password" placeholder="Password" name="password">
             <input type="submit" id="sisobtn" value="Login" name="siso-login">
         </form>
         <div class="members">
             don't have an account <button id="signUplink">Sign Up here!</button>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script src="script/script.js"></script>
 </body>
 </html>
