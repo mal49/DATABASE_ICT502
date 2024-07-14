@@ -12,23 +12,23 @@
 
         $isbn = validate($_GET['id']);
 
-        $sql = "SELECT * FROM book_reps WHERE ISBN=$isbn";
+        $sql = "SELECT * FROM book_reps WHERE ISBN=:ISBN";
         $stid = oci_parse($conn, $sql);
+
+        oci_bind_by_name($stdi, ":ISBN", $isbn);
 
         oci_execute($stid);
 
-        if(oci_num_rows($stid) > 0)
+        // Fetch the result
+        if($row = oci_fetch_array($stid, OCI_ASSOC)) 
         {
             $row = oci_fetch_assoc($stid);
-        }
-        else
+        } 
+        else 
         {
-            header("location: inventory.php");
+            // No rows found, redirect to inventory
+            header("Location: inventory.php");
+            exit;
         }
-    }
-    else
-    {
-        header("location: inventory.php");
-        exit;
     }
 ?>
