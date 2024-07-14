@@ -22,7 +22,7 @@
         // Fetch the result
         if($row = oci_fetch_array($stid, OCI_ASSOC)) 
         {
-            $row = oci_fetch_assoc($stid);
+            return $row;
         } 
         else 
         {

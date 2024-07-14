@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="../style/style.css">
 </head>
+
 <body>
     <div class="wrapper" id="signUp" style="display: none;">
         <h1 id="sisoheader">SIGN UP</h1>
@@ -19,7 +21,7 @@
             <input type="submit" id="sisobtn" value="Sign Up" name="siso-signup">
         </form>
         <div class="members">
-            Already a member? <button id="loginlink">Login here!</button>   
+            Already a member? <button id="loginlink">Login here!</button>
         </div>
     </div>
 
@@ -36,4 +38,5 @@
     </div>
     <script src="../script/script.js"></script>
 </body>
+
 </html>
