@@ -1,5 +1,71 @@
 <?php 
-    include("update.php");
+    include("connect.php");
+
+    $errorMessage = "";
+    $successMessage = "";
+
+    $id = $isbn = $book_title = $genre = $author = $publisher = $price = "";
+
+    if($_SERVER['REQUEST_METHOD'] == 'GET')
+    {
+        $id = isset($_GET['id']) ? $_GET['id'] : "" ;
+
+        if(empty($id))
+        {
+            header("location: inventory.php");
+            exit;
+        }
+
+        $sql = "SELECT * FROM book_reps WHERE ISBN:=id";
+        $stmt = oci_parse($conn, $sql);
+
+        oci_bind_by_name($stmt, ":id", $id);
+        oci_execute($stmt);
+
+        $row = oci_fetch_assoc($stmt);
+
+        if(!$row)
+        {
+            header("location: inventory.php");
+            exit;
+        }
+
+        $isbn = isset($row['ISBN']) ? $row['ISBN'] : "";
+        $book_title = isset($row['BOK_NAME']) ? $row['BOOK_NAME'] : "";
+        $genre = isset($row['GENRE']) ? $row['GENRE'] : "";
+        $author = isset($row['AUTHOR']) ? $row['AUTHOR'] : "";
+        $publisher = isset($row['PUBLISHER']) ? $row['PUBLISHER'] : "";
+        $price = isset($row['PRICE']) ? $row['PRICE'] : "";
+    }
+    elseif($_SERVER['REQUEST_METHOD'] == 'POST')
+    {
+        $isbn = $_POST['isbn'];
+        $book_title = isset($_POST['book_name']) ? $_POST['book_name'] : "";
+        $genre = isset($_POST['genre']) ? $_POST['genre'] : "";
+        $author = isset($_POST['author']) ? $_POST['author'] : "";
+        $publisher = isset($_POST['publisher']) ? $_POST['publisher'] : "";
+        $price = isset($_POST['price']) ? $_POST['price'] : "";
+
+        $sql = "UPDATE book_reps SET ISBN=:isbn, 
+                                     BOOK_NAME=:title,
+                                     GENRE =:genre,
+                                     AUTHOR =: author,
+                                     PUBLISHER=:publisher,
+                                     PRICE=:price
+                                     WHERE ISBN=:id";
+
+        $stmt = oci_parse($conn, $sql);
+
+        oci_bind_by_name($stmt, ':isbn', $isbn);
+        oci_bind_by_name($stmt, ':title', $book_title);
+        oci_bind_by_name($stmt, ':genre_id', $genre);
+        oci_bind_by_name($stmt, ':author_id', $author);
+        oci_bind_by_name($stmt, ':publisher_id', $publisher);
+        oci_bind_by_name($stmt, ':price', $price);
+        oci_bind_by_name($stmt, ':id', $id);
+
+        $result = oci_execute($stmt);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +104,7 @@
         <form action="add-book.php" method="post">
             <div class="form-group">
                 <label for="isbn">ISBN</label>
-                <input type="text" class="form-control" id="name" name="isbn" value="<?php $row['isbn']  ?>"> 
+                <input type="text" class="form-control" id="name" name="isbn" value="<?php echo htmlspecialchars($isbn); ?>"> 
             </div>
             <div class="form-group">
                 <label for="isbn">Book Name</label>

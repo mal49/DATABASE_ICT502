@@ -2,6 +2,7 @@
     if(isset($_GET['id']))
     {
         include("connect.php");
+
         function validate($data)
         {
             $data = trim($data);
@@ -12,22 +13,30 @@
 
         $isbn = validate($_GET['id']);
 
-        $sql = "SELECT * FROM book_reps WHERE ISBN=:ISBN";
-        $stid = oci_parse($conn, $sql);
+        $sql = "SELECT * FROM book_reps WHERE ISBN:=ISBN";
+        $stmt = oci_parse($conn, $sql);
 
-        oci_bind_by_name($stdi, ":ISBN", $isbn);
+        oci_bind_by_name($stmt, ":ISBN", $isbn);
 
-        oci_execute($stid);
+        oci_execute($stmt);
 
-        // Fetch the result
-        if($row = oci_fetch_array($stid, OCI_ASSOC)) 
+        if($row = oci_fetch_array($stmt, OCI_ASSOC))
         {
-            return $row;
-        } 
-        else 
+            $isbn = $row['ISBN'];
+            $book_title = $row['BOOK_NAME'];
+            $genre = $row['GENRE'];
+
+            ?>
+                <div>
+                    <p>ISBN: <?php echo $isbn ?></p>
+                    <p>Title: <?php echo $book_title ?></p>
+                    <p>Genre: <?php echo $genre ?></p>
+                </div>
+            <?php
+        }
+        else
         {
-            // No rows found, redirect to inventory
-            header("Location: inventory.php");
+            header("location: inventory.php");
             exit;
         }
     }
