@@ -29,6 +29,10 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin-left: 30%;
 }
+
+.container a{
+    margin-top: 10px;
+}
 </style>
 
 <body>
@@ -69,6 +73,7 @@
                 </select>
             </div>
             <button type="submit" class="btn btn-primary" name="save-btn">Save</button>
+            <a href="inventory.php" type="button" class="btn btn-danger">Back</a>
         </form>
     </div>
 </body>

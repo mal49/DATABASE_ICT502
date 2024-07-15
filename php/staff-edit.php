@@ -31,12 +31,12 @@
             exit;
         }
 
-        $isbn = isset($row['ISBN']) ? $row['ISBN'] : "";
-        $book_title = isset($row['BOOK_NAME']) ? $row['BOOK_NAME'] : "";
-        $genre = isset($row['GENRE']) ? $row['GENRE'] : "";
-        $author = isset($row['AUTHOR']) ? $row['AUTHOR'] : "";
-        $publisher = isset($row['PUBLISHER']) ? $row['PUBLISHER'] : "";
-        $price = isset($row['PRICE']) ? $row['PRICE'] : "";
+        $isbn = $row['ISBN'];
+        $book_title = $row['BOOK_NAME'];
+        $genre = $row['GENRE'];
+        $author = $row['AUTHOR'];
+        $publisher = $row['PUBLISHER'];
+        $price = $row['PRICE'];
     }
     elseif($_SERVER['REQUEST_METHOD'] == 'POST')
     {
@@ -47,13 +47,13 @@
         $publisher = isset($_POST['publisher']) ? $_POST['publisher'] : "";
         $price = isset($_POST['price']) ? $_POST['price'] : "";
 
-        $sql = "UPDATE book_reps SET isbn=:isbn, 
-                                     book_name=:book_name,
-                                     genre =:genre,
-                                     author =: author,
-                                     publisher=:publisher,
-                                     price=:price
-                                     WHERE isbn=:id";
+        $sql = "UPDATE book_reps SET ISBN=:isbn, 
+                                     BOOK_NAME=:book_name,
+                                     GENRE =:genre,
+                                     AUTHOR =: author,
+                                     PUBLISHER=:publisher,
+                                     PRICE=:price
+                                     WHERE ISBN=:id";
 
         $stmt = oci_parse($conn, $sql);
 
@@ -98,6 +98,10 @@
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
         margin-left: 30%;
     }
+
+    .container a{
+        margin-top: 10px;
+    }
 </style>
 <body>
     <div class="container">
@@ -136,6 +140,7 @@
                     </select>
             </div>
             <button type="submit" class="btn btn-primary" name="update-btn">Update</button>
+            <a href="inventory.php" type="button" class="btn btn-danger">Cancel</a>
         </form>
     </div>
 </body>

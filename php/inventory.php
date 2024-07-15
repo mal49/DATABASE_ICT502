@@ -45,6 +45,9 @@
 <body style="margin: 50px;">
     <div class="container">
         <h1>Book List</h1>
+        <form action="create-book.php" method="post">
+            <button type="submit" class="btn btn-warning">Add Book</button>
+        </form>
         <table class="table">
             <thead>
                 <tr>
