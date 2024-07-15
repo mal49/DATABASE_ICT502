@@ -45,9 +45,8 @@
 <body style="margin: 50px;">
     <div class="container">
         <h1>Book List</h1>
-        <form action="create-book.php" method="post">
-            <button type="submit" class="btn btn-warning">Add Book</button>
-        </form>
+        <a href="create-book.php" type="button" class="btn btn-warning">Add book</a>
+        <a href="../html/staff-homepage.html" type="button" class="btn btn-dark">To Homepage</a>
         <table class="table">
             <thead>
                 <tr>

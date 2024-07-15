@@ -37,6 +37,7 @@
 <body style="margin: 50px;">
 
     <h1>Book List</h1>
+    <a href="../html/client-homepage.html" type="button" class="btn btn-dark">To Homepage</a>
     <table class="table">
         <tr>
             <th>ISBN</th>
@@ -61,7 +62,7 @@
                 echo '<td>' . htmlentities($row['PUBLISHER']) . '</td>';
                 echo '<td>$' . htmlentities($row['PRICE']) . '</td>';
                 echo '<td>' . htmlentities($row['STATUS']) . '</td>';
-                echo '<td> <a href="#" class="btn btn-success">Add to cart</a> </td>';
+                echo '<td> <a href="#" class="btn btn-success">Buy Now!</a> </td>';
                 echo '</tr>';
                 $row_count++;
             }

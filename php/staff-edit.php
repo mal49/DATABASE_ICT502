@@ -66,82 +66,98 @@
         oci_bind_by_name($stmt, ':id', $id);
 
         $result = oci_execute($stmt);
+
+        if ($result) {
+            $successMessage = "Record updated successfully!";
+        } else {
+            $errorMessage = "Error updating record!";
+        }
     }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Book</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <style>
-    *{
-        margin: 0;
-        padding: 5px;
-        box-sizing: border-box;
-        font-family: monospace, sans-serif;
-        font-size: 15px;
-    }
+* {
+    margin: 0;
+    padding: 5px;
+    box-sizing: border-box;
+    font-family: monospace, sans-serif;
+    font-size: 15px;
+}
 
-    .container button{
-        margin-top: 10px;
-        margin-left: 5px;
-    }
+.container button {
+    margin-top: 10px;
+    margin-left: 5px;
+}
 
-    .container form{
-        width: 500px;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-        margin-left: 30%;
-    }
+.container form {
+    width: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-left: 30%;
+}
 
-    .container a{
-        margin-top: 10px;
-    }
+.container a {
+    margin-top: 10px;
+}
 </style>
+
 <body>
     <div class="container">
-    <h1 class="display-4 text-center">Update Book</h1>
+        <h1 class="display-4 text-center">Update Book</h1>
         <form action="inventory.php" method="post">
             <div class="form-group">
                 <label for="isbn">ISBN</label>
-                <input type="text" class="form-control" id="isbn" name="isbn" value="<?php echo htmlspecialchars($isbn); ?>"> 
+                <input type="text" class="form-control" id="isbn" name="isbn"
+                    value="<?php echo htmlspecialchars($isbn); ?>">
             </div>
             <div class="form-group">
                 <label for="book_name">Book Name</label>
-                <input type="text" class="form-control" id="book_title" name="book_name" value="<?php echo htmlspecialchars($book_title); ?>">
+                <input type="text" class="form-control" id="book_title" name="book_name"
+                    value="<?php echo htmlspecialchars($book_title); ?>">
             </div>
             <div class="form-group">
                 <label for="genre">Genre</label>
-                <input type="text" class="form-control" id="genre" name="genre" value="<?php echo htmlspecialchars($genre);  ?>">
+                <input type="text" class="form-control" id="genre" name="genre"
+                    value="<?php echo htmlspecialchars($genre);  ?>">
             </div>
             <div class="form-group">
                 <label for="author">Author</label>
-                <input type="text" class="form-control" id="author" name="author" value="<?php echo htmlspecialchars($author); ?>">
+                <input type="text" class="form-control" id="author" name="author"
+                    value="<?php echo htmlspecialchars($author); ?>">
             </div>
             <div class="form-group">
-                <label for="publisher">Publisher</label> 
-                <input type="text" class="form-control" id="publisher" name="publisher" value="<?php echo htmlspecialchars($publisher); ?>">
+                <label for="publisher">Publisher</label>
+                <input type="text" class="form-control" id="publisher" name="publisher"
+                    value="<?php echo htmlspecialchars($publisher); ?>">
             </div>
             <div class="form-group">
                 <label for="price">Price</label>
-                <input type="text" class="form-control" id="price" name="price" value="<?php echo htmlspecialchars($price); ?>">
+                <input type="text" class="form-control" id="price" name="price"
+                    value="<?php echo htmlspecialchars($price); ?>">
             </div>
             <div class="form-group">
                 <label for="avail">Availability</label>
-                    <select class="form-select" name="select-avail">
-                        <option Selected value="PS">Choose Availability</option>
-                        <option value="IN STOCK">In Stock</option>
-                        <option value="OUT-OF-STOCK">Out of Stock</option> 
-                    </select>
+                <select class="form-select" name="select-avail">
+                    <option Selected value="PS">Choose Availability</option>
+                    <option value="IN STOCK">In Stock</option>
+                    <option value="OUT-OF-STOCK">Out of Stock</option>
+                </select>
             </div>
             <button type="submit" class="btn btn-primary" name="update-btn">Update</button>
             <a href="inventory.php" type="button" class="btn btn-danger">Cancel</a>
         </form>
     </div>
 </body>
+
 </html>
