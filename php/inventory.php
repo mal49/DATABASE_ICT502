@@ -1,28 +1,27 @@
 <?php
     include("connect.php");
+
     $sql = "SELECT * FROM book_reps";
     $stid = oci_parse($conn, $sql);
 
-    /*
-    if(!$stid)
-    {
+    if (!$stid) {
         $e = oci_error($conn);
-        echo "SQL parsing failed: " . htmlentities($e['message']);
-        exit;
+        trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
     }
-    else
-    {
-        echo "<br>SQL parsing successful.<br>";
-    }
-    
-    if(!oci_execute($stid))
-    {
+
+    $execute_success = oci_execute($stid);
+
+    if (!$execute_success) {
         $e = oci_error($stid);
-        echo htmlentities($e['message']);
-        exit;
+        trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
     }
-    */
+
+    $rows = array();
+    while ($row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
+        $rows[] = $row;
+    }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,59 +31,66 @@
     <title>Inventory</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: monospace, sans-serif;
+        font-size: 15px;
+    }
+    </style>
 </head>
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: monospace, sans-serif;
-    font-size: 15px;
-}
-</style>
 
 <body style="margin: 50px;">
-
-    <h1>Book List</h1>
-    <table class="table">
-        <tr>
-            <th>ISBN</th>
-            <th>BOOK TITLE</th>
-            <th>GENRE</th>
-            <th>AUTHOR</th>
-            <th>PUBLISHER</th>
-            <th>PRICE</th>
-            <th>STATUS</th>
-            <th>ACTION</th>
-        </tr>
-        <?php
-            oci_execute($stid);
-            $row_count = 0;
-            while($row = oci_fetch_array($stid, OCI_ASSOC))
-            {
-                echo '<tr>'; 
-                echo "<form method='post' action = 'staff-edit.php'>";
-                echo '<td>' . htmlentities($row['ISBN']) . '</td>';
-                echo '<td>' . htmlentities($row['BOOK_NAME']) . '</td>';
-                echo '<td>' . htmlentities($row['GENRE']) . '</td>';
-                echo '<td>' . htmlentities($row['AUTHOR']) . '</td>';
-                echo '<td>' . htmlentities($row['PUBLISHER']) . '</td>';
-                echo '<td>$' . htmlentities($row['PRICE']) . '</td>';
-                echo '<td>' . htmlentities($row['STATUS']) . '</td>';
-                echo '<td> <a href="staff-edit.php?id='. htmlentities($row['ISBN']) .'" class="btn btn-success">Update</a> 
-                           <a href="#" class="btn btn-danger">Delete</a> 
-                      </td>';
-                echo "</form>";
-                echo '</tr>';
-                $row_count++;
-            }
-
-            if($row_count == 0)
-            {
-                echo "<tr><td colspan = '5'> No books found.</td></tr>";
-            }
-        ?>
-    </table>
+    <div class="container">
+        <h1>Book List</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ISBN</th>
+                    <th>BOOK TITLE</th>
+                    <th>GENRE</th>
+                    <th>AUTHOR</th>
+                    <th>PUBLISHER</th>
+                    <th>PRICE</th>
+                    <th>STATUS</th>
+                    <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (!empty($rows)): ?>
+                <?php foreach ($rows as $row): ?>
+                <tr>
+                    <td><?php echo isset($row['ISBN']) ? htmlentities($row['ISBN']) : ''; ?></td>
+                    <td><?php echo isset($row['BOOK_NAME']) ? htmlentities($row['BOOK_NAME']) : ''; ?></td>
+                    <td><?php echo isset($row['GENRE']) ? htmlentities($row['GENRE']) : ''; ?></td>
+                    <td><?php echo isset($row['AUTHOR']) ? htmlentities($row['AUTHOR']) : ''; ?></td>
+                    <td><?php echo isset($row['PUBLISHER']) ? htmlentities($row['PUBLISHER']) : ''; ?></td>
+                    <td><?php echo isset($row['PRICE']) ? '$' . htmlentities($row['PRICE']) : ''; ?></td>
+                    <td><?php echo isset($row['STATUS']) ? htmlentities($row['STATUS']) : ''; ?></td>
+                    <td>
+                        <form method="post" action="staff-edit.php">
+                            <input type="hidden" name="isbn"
+                                value="<?php echo isset($row['ISBN']) ? htmlentities($row['ISBN']) : ''; ?>">
+                            <button type="submit" class="btn btn-success">Update</button>
+                        </form>
+                        <form method="post" action="delete-book.php">
+                            <input type="hidden" name="isbn"
+                                value="<?php echo isset($row['ISBN']) ? htmlentities($row['ISBN']) : ''; ?>">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+                <?php else: ?>
+                <tr>
+                    <td colspan="8">No books found.</td>
+                </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>

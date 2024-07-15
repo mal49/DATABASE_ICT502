@@ -1,6 +1,7 @@
 <?php 
     include("connect.php");
 
+
     $errorMessage = "";
     $successMessage = "";
 
@@ -16,7 +17,7 @@
             exit;
         }
 
-        $sql = "SELECT * FROM book_reps WHERE ISBN:=id";
+        $sql = "SELECT * FROM book_reps WHERE ISBN=:id";
         $stmt = oci_parse($conn, $sql);
 
         oci_bind_by_name($stmt, ":id", $id);
@@ -31,7 +32,7 @@
         }
 
         $isbn = isset($row['ISBN']) ? $row['ISBN'] : "";
-        $book_title = isset($row['BOK_NAME']) ? $row['BOOK_NAME'] : "";
+        $book_title = isset($row['BOOK_NAME']) ? $row['BOOK_NAME'] : "";
         $genre = isset($row['GENRE']) ? $row['GENRE'] : "";
         $author = isset($row['AUTHOR']) ? $row['AUTHOR'] : "";
         $publisher = isset($row['PUBLISHER']) ? $row['PUBLISHER'] : "";
@@ -46,21 +47,21 @@
         $publisher = isset($_POST['publisher']) ? $_POST['publisher'] : "";
         $price = isset($_POST['price']) ? $_POST['price'] : "";
 
-        $sql = "UPDATE book_reps SET ISBN=:isbn, 
-                                     BOOK_NAME=:title,
-                                     GENRE =:genre,
-                                     AUTHOR =: author,
-                                     PUBLISHER=:publisher,
-                                     PRICE=:price
-                                     WHERE ISBN=:id";
+        $sql = "UPDATE book_reps SET isbn=:isbn, 
+                                     book_name=:book_name,
+                                     genre =:genre,
+                                     author =: author,
+                                     publisher=:publisher,
+                                     price=:price
+                                     WHERE isbn=:id";
 
         $stmt = oci_parse($conn, $sql);
 
         oci_bind_by_name($stmt, ':isbn', $isbn);
-        oci_bind_by_name($stmt, ':title', $book_title);
-        oci_bind_by_name($stmt, ':genre_id', $genre);
-        oci_bind_by_name($stmt, ':author_id', $author);
-        oci_bind_by_name($stmt, ':publisher_id', $publisher);
+        oci_bind_by_name($stmt, ':book_name', $book_title);
+        oci_bind_by_name($stmt, ':genre', $genre);
+        oci_bind_by_name($stmt, ':author', $author);
+        oci_bind_by_name($stmt, ':publisher', $publisher);
         oci_bind_by_name($stmt, ':price', $price);
         oci_bind_by_name($stmt, ':id', $id);
 
@@ -101,30 +102,30 @@
 <body>
     <div class="container">
     <h1 class="display-4 text-center">Update Book</h1>
-        <form action="add-book.php" method="post">
+        <form action="inventory.php" method="post">
             <div class="form-group">
                 <label for="isbn">ISBN</label>
-                <input type="text" class="form-control" id="name" name="isbn" value="<?php echo htmlspecialchars($isbn); ?>"> 
+                <input type="text" class="form-control" id="isbn" name="isbn" value="<?php echo htmlspecialchars($isbn); ?>"> 
             </div>
             <div class="form-group">
-                <label for="isbn">Book Name</label>
-                <input type="text" class="form-control" id="bk-title" name="bk-title" value="<?php $row['bk-title']  ?>>
+                <label for="book_name">Book Name</label>
+                <input type="text" class="form-control" id="book_title" name="book_name" value="<?php echo htmlspecialchars($book_title); ?>">
             </div>
             <div class="form-group">
-                <label for="isbn">Genre</label>
-                <input type="text" class="form-control" id="genre" name="genre" value="<?php $row['genre']  ?>>
+                <label for="genre">Genre</label>
+                <input type="text" class="form-control" id="genre" name="genre" value="<?php echo htmlspecialchars($genre);  ?>">
             </div>
             <div class="form-group">
-                <label for="isbn">Author</label>
-                <input type="text" class="form-control" id="author" name="author" value="<?php $row['author']  ?>>
+                <label for="author">Author</label>
+                <input type="text" class="form-control" id="author" name="author" value="<?php echo htmlspecialchars($author); ?>">
             </div>
             <div class="form-group">
-                <label for="isbn">Publisher</label> 
-                <input type="text" class="form-control" id="publisher" name="publisher" value="<?php $row['publisher']  ?>>
+                <label for="publisher">Publisher</label> 
+                <input type="text" class="form-control" id="publisher" name="publisher" value="<?php echo htmlspecialchars($publisher); ?>">
             </div>
             <div class="form-group">
-                <label for="isbn">Price</label>
-                <input type="text" class="form-control" id="price" name="price" value="<?php $row['price']  ?>>
+                <label for="price">Price</label>
+                <input type="text" class="form-control" id="price" name="price" value="<?php echo htmlspecialchars($price); ?>">
             </div>
             <div class="form-group">
                 <label for="avail">Availability</label>
