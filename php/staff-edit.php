@@ -7,38 +7,6 @@
 
     $isbn = $book_title = $genre = $author = $publisher = $price = $availability = "";
 
-    /*if($_SERVER['REQUEST_METHOD'] == 'GET')
-    {
-        $id = isset($_GET['id']) ? $_GET['id'] : "" ;
-
-        if(empty($id))
-        {
-            header("location: inventory.php");
-            exit;
-        }
-
-        $sql = "SELECT * FROM book_reps WHERE ISBN=:id AND PRICE=:price";
-        $stmt = oci_parse($conn, $sql);
-
-        oci_bind_by_name($stmt, ":id", $id);
-        oci_execute($stmt);
-
-        $row = oci_fetch_assoc($stmt);
-
-        if(!$row)
-        {
-            header("location: inventory.php");
-            exit;
-        }
-
-        $isbn = $row['ISBN'];
-        $book_title = $row['BOOK_NAME'];
-        $genre = $row['GENRE'];
-        $author = $row['AUTHOR'];
-        $publisher = $row['PUBLISHER'];
-        $price = $row['PRICE'];
-        $availability = $row['STATUS'];
-    }*/
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
         $isbn = $_POST['isbn'];
@@ -48,9 +16,9 @@
         if(isset($_POST['update-btn']))
         {
 
-                $sql = "UPDATE book_reps SET PRICE=:price,
-                                             STATUS=:status
-                                             WHERE ISBN=:id";
+            $sql = "UPDATE book_reps SET PRICE=:price,
+                                         STATUS=:status
+                                         WHERE ISBN=:id";
                                         
             $stmt = oci_parse($conn, $sql);
 

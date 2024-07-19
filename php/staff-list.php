@@ -70,6 +70,12 @@
                         <form method="post" action="staff-list-edit.php">
                             <input type="hidden" name="staffid"
                                 value="<?php echo isset($row['STAFFID']) ? htmlentities($row['STAFFID']) : ''; ?>">
+                            <input type="hidden" name="name"
+                                value="<?php echo isset($row['NAME']) ? htmlentities($row['NAME']) : ''; ?>">
+                            <input type="hidden" name="email"
+                                value="<?php echo isset($row['EMAIL']) ? htmlentities($row['EMAIL']) : ''; ?>">
+                            <input type="hidden" name="phonenumber"
+                                value="<?php echo isset($row['PHONE_NUM']) ? htmlentities($row['PHONE_NUM']) : ''; ?>">
                             <button type="submit" class="btn btn-success">Update</button>
                         </form>
                         <form method="post" action="delete-staff.php">

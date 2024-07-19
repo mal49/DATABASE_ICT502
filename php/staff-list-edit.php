@@ -5,14 +5,14 @@
     $errorMessage = "";
     $successMessage = "";
 
-    $id = $staffid = $name = $email = $phonenumber = $role = "";
+    $staffid = $name = $email = $phonenumber = $role = "";
 
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
         $staffid = $_POST['staffid'];
-        $name = isset($_POST['name']) ? $_POST['name'] : "";
-        $email = isset($_POST['email']) ? $_POST['email'] : "";
-        $phonenumber = isset($_POST['phonenumber']) ? $_POST['phonenumber'] : "";
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $phonenumber = $_POST['phonenumber'];
         $role = isset($_POST['role']) ? $_POST['role'] : "";
 
         if(isset($_POST['update-btn']))
@@ -86,12 +86,23 @@
         <form action="staff-list-edit.php" method="post">
             <input type="hidden" name="staffid" value="<?php echo htmlspecialchars($staffid); ?>">
             <div class="form-group">
+                <label for="id">Staff id</label>
+                <input class="form-control" type="text" value="<?php echo $staffid; ?>"
+                    aria-label="Disabled input example" disabled readonly>
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input class="form-control" type="text" value="<?php echo $name; ?>"
+                    aria-label="Disabled input example" disabled readonly>
+            </div>
+            <div class="form-group">
                 <label for="email">Email</label>
                 <input type="text" class="form-control" id="email" name="email" value="<?php echo $email; ?>">
             </div>
             <div class="form-group">
                 <label for="email">Phone number</label>
-                <input type="text" class="form-control" id="phonenumber" name="phonenumber" value="<?php echo $phonenumber; ?>">
+                <input type="text" class="form-control" id="phonenumber" name="phonenumber"
+                    value="<?php echo $phonenumber; ?>">
             </div>
             <div class="form-group">
                 <label for="role">Role</label>
