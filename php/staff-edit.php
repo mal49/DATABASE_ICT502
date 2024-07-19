@@ -113,7 +113,7 @@
             <div class="form-group">
                 <label for="price">Price</label>
                 <input type="text" class="form-control" id="price" name="price"
-                    value="<?php echo htmlspecialchars($price); ?>">
+                    value="<?php echo $price; ?>">
             </div>
             <div class="form-group">
                 <label for="avail">Availability</label>

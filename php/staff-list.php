@@ -67,12 +67,12 @@
                     <td><?php echo isset($row['PHONE_NUM']) ? htmlentities($row['PHONE_NUM']) : ''; ?></td>
                     <td><?php echo isset($row['ROLE']) ? htmlentities($row['ROLE']) : ''; ?></td>
                     <td>
-                        <form method="post" action="staff-edit.php">
+                        <form method="post" action="staff-list-edit.php">
                             <input type="hidden" name="staffid"
                                 value="<?php echo isset($row['STAFFID']) ? htmlentities($row['STAFFID']) : ''; ?>">
                             <button type="submit" class="btn btn-success">Update</button>
                         </form>
-                        <form method="post" action="delete-book.php">
+                        <form method="post" action="delete-staff.php">
                             <input type="hidden" name="staffid"
                                 value="<?php echo isset($row['STAFFID']) ? htmlentities($row['STAFFID']) : ''; ?>">
                             <button type="submit" class="btn btn-danger">Delete</button>
