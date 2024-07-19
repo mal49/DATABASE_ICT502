@@ -1,7 +1,7 @@
 <?php
     include("connect.php");
 
-    $sql = "SELECT * FROM book_reps";
+    $sql = "SELECT * FROM staff";
     $stid = oci_parse($conn, $sql);
 
     if (!$stid) {
@@ -28,7 +28,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory</title>
+    <title>Staff List</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
@@ -45,41 +45,36 @@
 <body style="margin: 50px;">
     <div class="container">
         <h1>Book List</h1>
-        <a href="create-book.php" type="button" class="btn btn-warning">Add book</a>
+        <a href="siso-staff-register.php" type="button" class="btn btn-warning">Add staff</a>
         <a href="../html/staff-homepage.html" type="button" class="btn btn-dark">To Homepage</a>
         <table class="table">
             <thead>
                 <tr>
-                    <th>ISBN</th>
-                    <th>BOOK TITLE</th>
-                    <th>GENRE</th>
-                    <th>AUTHOR</th>
-                    <th>PUBLISHER</th>
-                    <th>PRICE</th>
-                    <th>STATUS</th>
-                    <th>ACTION</th>
+                    <th>STAFF ID</th>
+                    <th>NAME</th>
+                    <th>EMAIL</th>
+                    <th>PHONE NUMBER</th>
+                    <th>ROLE</th>
                 </tr>
             </thead>
             <tbody>
                 <?php if (!empty($rows)): ?>
                 <?php foreach ($rows as $row): ?>
                 <tr>
-                    <td><?php echo isset($row['ISBN']) ? htmlentities($row['ISBN']) : ''; ?></td>
-                    <td><?php echo isset($row['BOOK_NAME']) ? htmlentities($row['BOOK_NAME']) : ''; ?></td>
-                    <td><?php echo isset($row['GENRE']) ? htmlentities($row['GENRE']) : ''; ?></td>
-                    <td><?php echo isset($row['AUTHOR']) ? htmlentities($row['AUTHOR']) : ''; ?></td>
-                    <td><?php echo isset($row['PUBLISHER']) ? htmlentities($row['PUBLISHER']) : ''; ?></td>
-                    <td><?php echo isset($row['PRICE']) ? '$' . htmlentities($row['PRICE']) : ''; ?></td>
-                    <td><?php echo isset($row['STATUS']) ? htmlentities($row['STATUS']) : ''; ?></td>
+                    <td><?php echo isset($row['STAFFID']) ? htmlentities($row['STAFFID']) : ''; ?></td>
+                    <td><?php echo isset($row['NAME']) ? htmlentities($row['NAME']) : ''; ?></td>
+                    <td><?php echo isset($row['EMAIL']) ? htmlentities($row['EMAIL']) : ''; ?></td>
+                    <td><?php echo isset($row['PHONE_NUM']) ? htmlentities($row['PHONE_NUM']) : ''; ?></td>
+                    <td><?php echo isset($row['ROLE']) ? htmlentities($row['ROLE']) : ''; ?></td>
                     <td>
                         <form method="post" action="staff-edit.php">
-                            <input type="hidden" name="isbn"
-                                value="<?php echo isset($row['ISBN']) ? htmlentities($row['ISBN']) : ''; ?>">
+                            <input type="hidden" name="staffid"
+                                value="<?php echo isset($row['STAFFID']) ? htmlentities($row['STAFFID']) : ''; ?>">
                             <button type="submit" class="btn btn-success">Update</button>
                         </form>
-                        <form method="post" action="delete.php">
-                            <input type="hidden" name="isbn"
-                                value="<?php echo isset($row['ISBN']) ? htmlentities($row['ISBN']) : ''; ?>">
+                        <form method="post" action="delete-book.php">
+                            <input type="hidden" name="staffid"
+                                value="<?php echo isset($row['STAFFID']) ? htmlentities($row['STAFFID']) : ''; ?>">
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </td>
@@ -87,7 +82,7 @@
                 <?php endforeach; ?>
                 <?php else: ?>
                 <tr>
-                    <td colspan="8">No books found.</td>
+                    <td colspan="8">No staff found.</td>
                 </tr>
                 <?php endif; ?>
             </tbody>
