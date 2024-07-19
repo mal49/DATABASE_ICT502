@@ -100,7 +100,7 @@
                 </select>
             </div>
             <button type="submit" class="btn btn-primary" name="update-btn">Update</button>
-            <a href="inventory.php" type="button" class="btn btn-danger">Return</a>
+            <a href="inventory.php" type="button" class="btn btn-dark">Return</a>
         </form>
     </div>
 </body>

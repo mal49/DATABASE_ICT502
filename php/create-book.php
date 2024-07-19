@@ -73,7 +73,7 @@
                 </select>
             </div>
             <button type="submit" class="btn btn-primary" name="save-btn">Save</button>
-            <a href="inventory.php" type="button" class="btn btn-danger">Back</a>
+            <a href="inventory.php" type="button" class="btn btn-dark">Back</a>
         </form>
     </div>
 </body>
