@@ -7,37 +7,7 @@
 
     $id = $staffid = $name = $email = $phonenumber = $role = "";
 
-    if($_SERVER['REQUEST_METHOD'] == 'GET')
-    {
-        $id = isset($_GET['id']) ? $_GET['id'] : "" ;
-
-        if(empty($id))
-        {
-            header("location: staff-list.php");
-            exit;
-        }
-
-        $sql = "SELECT * FROM staff WHERE STAFFID=:id";
-        $stmt = oci_parse($conn, $sql);
-
-        oci_bind_by_name($stmt, ":id", $id);
-        oci_execute($stmt);
-
-        $row = oci_fetch_assoc($stmt);
-
-        if(!$row)
-        {
-            header("location: staff-list.php");
-            exit;
-        }
-
-        $staffid = $row['STAFFID'];
-        $name = $row['NAME'];
-        $email = $row['EMAIL'];
-        $phonenumber = $row['PHONE_NUM'];
-        $role = $row['ROLE'];
-    }
-    elseif($_SERVER['REQUEST_METHOD'] == 'POST')
+    if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
         $staffid = $_POST['staffid'];
         $name = isset($_POST['name']) ? $_POST['name'] : "";
@@ -45,25 +15,31 @@
         $phonenumber = isset($_POST['phonenumber']) ? $_POST['phonenumber'] : "";
         $role = isset($_POST['role']) ? $_POST['role'] : "";
 
-        $sql = "UPDATE staff SET EMAIL=:email,
-                                 PHONE_NUM=:phonenumber,
-                                 ROLE =:role
-                                 WHERE STAFFID=:id";
-                                     
-        $stmt = oci_parse($conn, $sql);
+        if(isset($_POST['update-btn']))
+        {
+                $sql = "UPDATE staff SET EMAIL=:email,
+                                    PHONE_NUM=:phonenumber,
+                                    ROLE =:role
+                                    WHERE STAFFID=:id";
+                                        
+            $stmt = oci_parse($conn, $sql);
 
-        oci_bind_by_name($stmt, ':email', $email);
-        oci_bind_by_name($stmt, ':phonenumber', $phonenumber);
-        oci_bind_by_name($stmt, ':role', $role);
-        oci_bind_by_name($stmt, ':id', $staffid);
+            oci_bind_by_name($stmt, ':email', $email);
+            oci_bind_by_name($stmt, ':phonenumber', $phonenumber);
+            oci_bind_by_name($stmt, ':role', $role);
+            oci_bind_by_name($stmt, ':id', $staffid);
 
-        $result = oci_execute($stmt);
+            $result = oci_execute($stmt);
 
-        if ($result) {
-            $successMessage = "Record updated successfully!";
-        } else {
-            $errorMessage = "Error updating record!";
+            if ($result) {
+                $successMessage = "Record updated successfully!";
+                header("location: staff-list.php");
+                exit;
+            } else {
+                $errorMessage = "Error updating record!";
+            }
         }
+        
     }
 ?>
 
@@ -121,9 +97,9 @@
                 <label for="role">Role</label>
                 <select class="form-select" name="role">
                     <option Selected value="<?php echo $role; ?>">Choose Role</option>
-                    <option value="ADMIN">Admin</option>
-                    <option value="MANAGER">Manager</option>
-                    <option value="REGULAR STAFF">Regular Staff</option>
+                    <option value="MANAGER">MANAGER</option>
+                    <option value="ADMIN">ADMIN</option>
+                    <option value="REGULAR STAFF">REGULAR STAFF</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary" name="update-btn">Update</button>

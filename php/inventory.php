@@ -74,7 +74,11 @@
                     <td>
                         <form method="post" action="staff-edit.php">
                             <input type="hidden" name="isbn"
-                                value="<?php echo isset($row['ISBN']) ? htmlentities($row['ISBN']) : ''; ?>">
+                                value="<?php echo isset($row['ISBN']) ? htmlentities($row['ISBN']) : '' ; ?>">
+                            <input type="hidden" name="price"
+                                value="<?php echo isset($row['PRICE']) ? htmlentities($row['PRICE']) : '' ; ?>">
+                            <input type="hidden" name="book-title"
+                                value="<?php echo isset($row['BOOK_NAME']) ? htmlentities($row['BOOK_NAME']) : '' ; ?>">
                             <button type="submit" class="btn btn-success">Update</button>
                         </form>
                         <form method="post" action="delete.php">

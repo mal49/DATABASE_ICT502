@@ -5,9 +5,9 @@
     $errorMessage = "";
     $successMessage = "";
 
-    $id = $isbn = $book_title = $genre = $author = $publisher = $price = $availability = "";
+    $isbn = $book_title = $genre = $author = $publisher = $price = $availability = "";
 
-    if($_SERVER['REQUEST_METHOD'] == 'GET')
+    /*if($_SERVER['REQUEST_METHOD'] == 'GET')
     {
         $id = isset($_GET['id']) ? $_GET['id'] : "" ;
 
@@ -17,7 +17,7 @@
             exit;
         }
 
-        $sql = "SELECT * FROM book_reps WHERE ISBN=:id";
+        $sql = "SELECT * FROM book_reps WHERE ISBN=:id AND PRICE=:price";
         $stmt = oci_parse($conn, $sql);
 
         oci_bind_by_name($stmt, ":id", $id);
@@ -38,34 +38,37 @@
         $publisher = $row['PUBLISHER'];
         $price = $row['PRICE'];
         $availability = $row['STATUS'];
-    }
-    elseif($_SERVER['REQUEST_METHOD'] == 'POST')
+    }*/
+    if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
         $isbn = $_POST['isbn'];
-        $book_title = isset($_POST['book_title']) ? $_POST['book_title'] : "";
-        $genre = isset($_POST['genre']) ? $_POST['genre'] : "";
-        $author = isset($_POST['author']) ? $_POST['author'] : "";
-        $publisher = isset($_POST['publisher']) ? $_POST['publisher'] : "";
-        $price = isset($_POST['price']) ? $_POST['price'] : "";
+        $price = $_POST['price'];
+        $book_title = $_POST['book-title'];
         $availability = isset($_POST['availability']) ? $_POST['availability'] : "";
+        if(isset($_POST['update-btn']))
+        {
 
-        $sql = "UPDATE book_reps SET PRICE=:price,
-                                     STATUS=:status
-                                     WHERE ISBN=:id";
-                                     
-        $stmt = oci_parse($conn, $sql);
+                $sql = "UPDATE book_reps SET PRICE=:price,
+                                             STATUS=:status
+                                             WHERE ISBN=:id";
+                                        
+            $stmt = oci_parse($conn, $sql);
 
-        oci_bind_by_name($stmt, ':price', $price);
-        oci_bind_by_name($stmt, ':status', $availability);
-        oci_bind_by_name($stmt, ':id', $isbn);
+            oci_bind_by_name($stmt, ':price', $price);
+            oci_bind_by_name($stmt, ':status', $availability);
+            oci_bind_by_name($stmt, ':id', $isbn);
 
-        $result = oci_execute($stmt);
+            $result = oci_execute($stmt);
 
-        if ($result) {
-            $successMessage = "Record updated successfully!";
-        } else {
-            $errorMessage = "Error updating record!";
+            if ($result) {
+                $successMessage = "Record updated successfully!";
+                header("location: inventory.php");
+                exit;
+            } else {
+                $errorMessage = "Error updating record!";
+            }
         }
+
     }
 ?>
 
@@ -112,11 +115,16 @@
         <form action="staff-edit.php" method="post">
             <input type="hidden" name="isbn" value="<?php echo htmlspecialchars($isbn); ?>">
             <div class="form-group">
+                <label for="book-title">Book Title</label>
+                <input class="form-control" type="text" value="<?php echo $book_title; ?>"
+                    aria-label="Disabled input example" disabled readonly>
+            </div>
+            <div class="form-group">
                 <label for="price">Price</label>
                 <input type="text" class="form-control" id="price" name="price" value="<?php echo $price; ?>">
             </div>
             <div class="form-group">
-                <label for="availability">Status</label>
+                <label for="role">Status</label>
                 <select class="form-select" name="availability">
                     <option Selected value="<?php echo $availability; ?>">Choose status</option>
                     <option value="IN STOCK">IN STOCK</option>
