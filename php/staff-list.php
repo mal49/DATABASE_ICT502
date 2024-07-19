@@ -44,7 +44,7 @@
 
 <body style="margin: 50px;">
     <div class="container">
-        <h1>Book List</h1>
+        <h1>Staff List</h1>
         <a href="siso-staff-register.php" type="button" class="btn btn-warning">Add staff</a>
         <a href="../html/staff-homepage.html" type="button" class="btn btn-dark">To Homepage</a>
         <table class="table">

@@ -42,12 +42,12 @@
     elseif($_SERVER['REQUEST_METHOD'] == 'POST')
     {
         $isbn = $_POST['isbn'];
-        $book_title = isset($_POST['book_name']) ? $_POST['book_name'] : "";
+        $book_title = isset($_POST['book_title']) ? $_POST['book_title'] : "";
         $genre = isset($_POST['genre']) ? $_POST['genre'] : "";
         $author = isset($_POST['author']) ? $_POST['author'] : "";
         $publisher = isset($_POST['publisher']) ? $_POST['publisher'] : "";
         $price = isset($_POST['price']) ? $_POST['price'] : "";
-        $availability = isset($_POST['status']) ? $_POST['status'] : "";
+        $availability = isset($_POST['availability']) ? $_POST['availability'] : "";
 
         $sql = "UPDATE book_reps SET PRICE=:price,
                                      STATUS=:status
@@ -57,7 +57,7 @@
 
         oci_bind_by_name($stmt, ':price', $price);
         oci_bind_by_name($stmt, ':status', $availability);
-        oci_bind_by_name($stmt, ':id', $id);
+        oci_bind_by_name($stmt, ':id', $isbn);
 
         $result = oci_execute($stmt);
 
@@ -109,22 +109,22 @@
 <body>
     <div class="container">
         <h1 class="display-4 text-center">Update Book</h1>
-        <form action="inventory.php" method="post">
+        <form action="staff-edit.php" method="post">
+            <input type="hidden" name="isbn" value="<?php echo htmlspecialchars($isbn); ?>">
             <div class="form-group">
                 <label for="price">Price</label>
-                <input type="text" class="form-control" id="price" name="price"
-                    value="<?php echo $price; ?>">
+                <input type="text" class="form-control" id="price" name="price" value="<?php echo $price; ?>">
             </div>
             <div class="form-group">
-                <label for="avail">Availability</label>
-                <select class="form-select" name="select-avail">
-                    <option Selected value="PS">Choose Availability</option>
-                    <option value="IN STOCK">In Stock</option>
-                    <option value="OUT-OF-STOCK">Out of Stock</option>
+                <label for="availability">Status</label>
+                <select class="form-select" name="availability">
+                    <option Selected value="<?php echo $availability; ?>">Choose status</option>
+                    <option value="IN STOCK">IN STOCK</option>
+                    <option value="OUT OF STOCK">OUT OF STOCK</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary" name="update-btn">Update</button>
-            <a href="inventory.php" type="button" class="btn btn-danger">Cancel</a>
+            <a href="inventory.php" type="button" class="btn btn-danger">Return</a>
         </form>
     </div>
 </body>
